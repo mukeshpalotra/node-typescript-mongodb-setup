@@ -1,0 +1,511 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "FLAIR BACKEND API's Documentatation",
+        "description": "FLAIR API's",
+        "license": {
+            "name": "Licensened",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "http://localhost:3000/",
+    "basePath": "",
+    "tags": [
+        {
+            "name": "User",
+            "description": "API for the User section"
+        },
+        {
+            "name": "Car",
+            "description": "API for the project section"
+        }
+    ],
+    "securityDefinitions": {
+        "jwt": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "scheme": "bearer"
+        }
+    },
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/user/create": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "User registration",
+                        "schema": {
+                            "required": [
+                                "fullName",
+                                "phoneNumber",
+                                "countryCode"
+                            ],
+                            "properties": {
+                                "fullName": {
+                                    "type": "string"
+                                },
+                                "phoneNumber": {
+                                    "type": "string"
+                                },
+                                "countryCode": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OTP send successfully."
+                    }
+                }
+            }
+        },
+        "/user/sendOtp": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "parameters": [
+                    {
+                        "name": "User",
+                        "in": "body",
+                        "description": "Send OTP to phone number",
+                        "schema": {
+                            "properties": {
+                                "phoneNumber": {
+                                    "type": "string"
+                                },
+                                "countryCode": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Send OTP to User's phoneNumber successfully"
+                    }
+                }
+            }
+        },
+        "/user/verifyOtp": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "parameters": [
+                    {
+                        "name": "User",
+                        "in": "body",
+                        "description": "Verify OTP ",
+                        "schema": {
+                            "required": [
+                                " otp"
+                            ],
+                            "properties": {
+                                "phoneNumber": {
+                                    "type": "string"
+                                },
+                                "otp": {
+                                    "type": "string"
+                                },
+                                "countryCode": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OTP verified successfully"
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "parameters": [
+                    {
+                        "name": "User",
+                        "in": "body",
+                        "description": "User login",
+                        "schema": {
+                            "required": [
+                                "phoneNumber",
+                                "countryCode",
+                                "password"
+                            ],
+                            "properties": {
+                                "phoneNumber": {
+                                    "type": "string"
+                                },
+                                "countryCode": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User login successfully",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/logout": {
+            "post": {
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ],
+                "tags": [
+                    "User"
+                ],
+                "parameters": [
+                    {
+                        "name": "User",
+                        "in": "body",
+                        "description": "User logout",
+                        "schema": {
+                            "required": [
+                                "accessToken",
+                                "refreshToken"
+                            ],
+                            "properties": {
+                                "accessToken": {
+                                    "type": "string"
+                                },
+                                "refreshToken": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User logout successfully"
+                    }
+                }
+            }
+        },
+        "/user/changePassword": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "parameters": [
+                    {
+                        "name": "User",
+                        "in": "body",
+                        "description": "Change password ",
+                        "schema": {
+                            "required": [
+                                "oldPassword",
+                                "newPassword"
+                            ],
+                            "properties": {
+                                "oldPassword": {
+                                    "type": "string"
+                                },
+                                "newPassword": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": " New password Change successfully"
+                    }
+                }
+            }
+        },
+        "/user/forgotPassword": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "parameters": [
+                    {
+                        "name": "User",
+                        "in": "body",
+                        "description": "Update password ",
+                        "schema": {
+                            "required": [
+                                "phoneNumber",
+                                "password",
+                                "countryCode"
+                            ],
+                            "properties": {
+                                "phoneNumber": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                },
+                                "countryCode": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New password updated successfully"
+                    }
+                }
+            }
+        },
+        "/user/": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User Profile successfully fetched."
+                    }
+                }
+            }
+        },
+        "/user/update": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "parameters": [
+                    {
+                        "name": "User",
+                        "in": "body",
+                        "description": "User profile update",
+                        "schema": {
+                            "required": [],
+                            "properties": {
+                                "fullName": {
+                                    "type": "string"
+                                },
+                                "profileImageUrl": {
+                                    "type": "string"
+                                },
+                                "phoneNumber": {
+                                    "type": "string"
+                                },
+                                "countryCode": {
+                                    "type": "string"
+                                },
+                                "status": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User Profile successfully update."
+                    }
+                }
+            }
+        },
+        "/user/delete": {
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "parameters": [],
+                "security": [
+                    {
+                        "jwt": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User successfully deleted."
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "required": [
+                "title",
+                "remark"
+            ],
+            "properties": {
+                "id": {
+                    "type": "number"
+                },
+                "fullName": {
+                    "type": "string"
+                },
+                "note": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "active",
+                        "inactive"
+                    ],
+                    "default": "active"
+                },
+                "phoneNumber": {
+                    "type": "string"
+                },
+                "countryCode": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "profileImageUrl": {
+                    "type": "string"
+                },
+                "loginType": {
+                    "type": "string"
+                },
+                "socialAuthId": {
+                    "type": "string"
+                },
+                "phoneVerificationCode": {
+                    "type": "string"
+                },
+                "phoneVerificationDate": {
+                    "type": "string"
+                }
+            }
+        },
+        "Kid": {
+            "required": [
+                "fullName",
+                "birthYear",
+                "birthMonth",
+                "note",
+                "profileImageUrl"
+            ],
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "uniqueItems": true
+                },
+                "fullName": {
+                    "type": "string"
+                },
+                "birthYear": {
+                    "type": "number"
+                },
+                "birthMonth": {
+                    "type": "number"
+                },
+                "profileImageUrl": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "active",
+                        "inactive"
+                    ],
+                    "default": "active"
+                },
+                "note": {
+                    "type": "string"
+                },
+                "UserId": {
+                    "type": "number"
+                },
+                "deleteAt": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        }
+    }
+}

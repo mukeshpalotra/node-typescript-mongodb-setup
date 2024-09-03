@@ -1,0 +1,49 @@
+.swagger-ui .topbar {
+    background-color: #444;
+}
+
+.swagger-ui .info .base-url {
+    font-size: 22px;
+    margin-top: 20px;
+}
+
+.swagger-ui .markdown p {
+    font-size: 18px;
+    color: #333;
+}
+
+.swagger-ui .btn.execute {
+    background-color: #007bff;
+}
+
+.swagger-ui button {
+    background: #17a2b8;
+    color: #fff;
+}
+
+.swagger-ui .scheme-container {
+    background-color: #4c3991;
+}
+
+.swagger-ui .markdown p {
+    color: #1f4bd0;
+    text-align: center;
+}
+
+.opblock-description-wrapper .markdown p,
+.swagger-ui .parameters-col_description .markdown p,
+td.response-col_description .markdown p {
+    font-size: 16px;
+}
+
+.swagger-ui .info {
+    margin: 10px 0;
+}
+
+.swagger-ui .markdown p,
+.swagger-ui .markdown pre,
+.swagger-ui .renderedMarkdown p,
+.swagger-ui .renderedMarkdown pre {
+    margin: 10px auto;
+    color: #333;
+}
